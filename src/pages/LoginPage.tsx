@@ -1,4 +1,3 @@
-import React from "react";
 import * as Yup from "yup";
 
 import { Box, Button, TextField, Typography, Paper } from "@mui/material";

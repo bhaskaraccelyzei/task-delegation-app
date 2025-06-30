@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -17,8 +17,8 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleMenuOpen = () => {
+    // setAnchorEl(event.currentTarget);
   };
 
   const handleMenuClose = () => {

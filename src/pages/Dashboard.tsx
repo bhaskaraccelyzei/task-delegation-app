@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles'; // Import useTheme
 import Header from '../components/Header';
