@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import GoogleIcon from "../assets/google-original.svg";
 import GitIcon from "../assets/github-original.svg";
 import { Formik } from "formik";
+import { useNavigate } from "react-router-dom";
 
 const LoginSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -14,6 +15,10 @@ const LoginSchema = Yup.object({
     .required("Password is required"),
 });
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const staticEmail = "admin@accelyzei.com";
+  const staticPassword = "password123";
   return (
     <Box
       sx={{
@@ -90,8 +95,16 @@ const LoginPage = () => {
           <Formik
             initialValues={{ email: "", password: "" }}
             validationSchema={LoginSchema}
-            onSubmit={(values) => {
-              console.log("Submitted:", values); // later: connect to backend
+            onSubmit={(values, { setSubmitting, setErrors }) => {
+              if (
+                values.email === staticEmail &&
+                values.password === staticPassword
+              ) {
+                navigate("/dashboard");
+              } else {
+                setErrors({ password: "Invalid credentials" }); 
+              }
+              setSubmitting(false);
             }}
           >
             {({ handleChange, handleSubmit, values, errors, touched }) => (

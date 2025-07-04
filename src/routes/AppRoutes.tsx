@@ -1,14 +1,27 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import LoginPage from '../pages/LoginPage'
 import Dashboard from '../pages/Dashboard'
+import Teams from '../pages/Teams'
+import Tasks from '../pages/Tasks'
+import DashboardLayout from '../pages/DashboardLayout'
 
 const AppRoutes = () => {
   return (
     <Routes>
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='' element={<Navigate to="/dashboard" />} />
-    </Routes>
+  {/* Dashboard layout with nested pages inside */}
+  <Route path="/dashboard" element={<DashboardLayout />}>
+    <Route index element={<Dashboard />} />
+    <Route path="teams" element={<Teams />} />
+    <Route path="tasks" element={<Tasks />} />
+  </Route>
+
+  {/* Login page */}
+  <Route path="/login" element={<LoginPage />} />
+
+  {/* Default redirect */}
+  <Route path="" element={<Navigate to="/dashboard" />} />
+</Routes>
+
   )
 }
 

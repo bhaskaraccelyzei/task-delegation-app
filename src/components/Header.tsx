@@ -13,17 +13,27 @@ import {
 import logo from "../assets/accelyzei-logo.png";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
+  
+const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+const navigate = useNavigate();
 
-  const handleMenuOpen = () => {
-    // setAnchorEl(event.currentTarget);
-  };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
+const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  setAnchorEl(event.currentTarget); // This sets the anchor for the menu
+};
+
+const handleMenuClose = () => {
+  setAnchorEl(null); // Close the menu
+};
+
+const handleLogout = () => {
+  // Clear tokens or user data later here if needed
+  handleMenuClose(); // close the menu
+  navigate("/login"); // redirect to login page
+};
   return (
     <div>
       <AppBar
@@ -102,7 +112,7 @@ const Header = () => {
                 Profile
               </MenuItem>
               <Divider />
-              <MenuItem onClick={handleMenuClose}>
+              <MenuItem onClick={handleLogout}>
                 <LogoutIcon sx={{ mr: 1 }} />
                 Logout
               </MenuItem>

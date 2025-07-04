@@ -2,10 +2,13 @@ import { Box, IconButton, useTheme } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import PeopleIcon from '@mui/icons-material/People';
+import { useNavigate } from 'react-router-dom';
 
 
 const Sidebar = () => {
     const theme = useTheme();
+    const navigate = useNavigate();
+
 
   return (
     <Box
@@ -24,19 +27,22 @@ const Sidebar = () => {
   }}
 >
   {/* Top icons */}
-  <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
-    <IconButton sx={{ color: '#fff' }}>
-      <DashboardIcon />
-    </IconButton>
-    <IconButton sx={{ color: '#fff' }}>
-      <AssignmentIcon />
-    </IconButton>
-  </Box>
+  <Box sx={{ marginTop: "10px" }} display="flex" flexDirection="column" alignItems="center" gap={3}>
+      <IconButton title='Dashboard' sx={{ color: '#fff' }} onClick={() => navigate('/dashboard')}>
+        <DashboardIcon />
+      </IconButton>
+
+      <IconButton title='Tasks' sx={{ color: '#fff' }} onClick={() => navigate('/dashboard/tasks')}>
+        <AssignmentIcon />
+      </IconButton>
+
+      <IconButton title='Teams' sx={{ color: '#fff' }} onClick={() => navigate('/dashboard/teams')}>
+        <PeopleIcon />
+      </IconButton>
+    </Box>
 
   {/* Bottom icon (like Logout) */}
-  <IconButton sx={{ color: '#fff' }}>
-    <PeopleIcon />
-  </IconButton>
+
 </Box>
 
   );
