@@ -19,7 +19,7 @@ const AppRoutes = () => {
   <Route path="/login" element={<LoginPage />} />
 
   {/* Default redirect */}
-  <Route path="" element={<Navigate to="/dashboard" />} />
+  <Route path="" element={<Navigate to="/login" />} />
 </Routes>
 
   )
