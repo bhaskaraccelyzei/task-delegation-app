@@ -1,4 +1,3 @@
-import React from 'react'
 import FilterBar from './FilterBar'
 import TaskCard from './TaskCard';
 
