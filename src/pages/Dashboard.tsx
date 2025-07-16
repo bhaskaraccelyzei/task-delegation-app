@@ -27,20 +27,19 @@ const Dashboard = () => {
       sx={{
         display: "flex",
         flexWrap: "wrap",
-        gap: 3,
+        // gap: 3,
         alignItems: "stretch", // ensures consistent height if needed
       }}
     >
-      {[...Array(8)].map((_, index) => (
-        <Box
-          key={index}
+     <Box
+          // key={index}
           sx={{
-            width: {
-              xs: "100%",   // 1 card per row on mobile
-              sm: "48%",    // 2 per row on small screens
-              md: "31.5%",  // 3 per row on medium
-              lg: "23%",    // 4 per row on large
-            },
+            // width: {
+            //   xs: "100%",   // 1 card per row on mobile
+            //   sm: "48%",    // 2 per row on small screens
+            //   md: "31.5%",  // 3 per row on medium
+            //   lg: "23%",    // 4 per row on large
+            // },
             flexGrow: 1,
           }}
         >
@@ -50,12 +49,12 @@ const Dashboard = () => {
               p: 3,
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-between",
-              alignItems: "center",
+              // justifyContent: "space-between",
+              // alignItems: "center",
               cursor: "pointer",
               transition: "all 0.3s ease",
               borderRadius: 3,
-              
+              width:"300px",
               height: 250,
               "&:hover": {
                 transform: "scale(1.05)",
@@ -64,7 +63,7 @@ const Dashboard = () => {
             }}
           >
             <Box textAlign="center">
-              <AssignmentIcon fontSize="large" color="primary" />
+              <AssignmentIcon  color="primary" />
               <Typography variant="h6" mt={2} fontWeight="bold">
                 Tasks
               </Typography>
@@ -77,7 +76,7 @@ const Dashboard = () => {
             </Button>
           </Card>
         </Box>
-      ))}
+ 
     </Box>
   </Box>
 

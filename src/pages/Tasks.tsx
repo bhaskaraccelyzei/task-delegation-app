@@ -41,7 +41,7 @@ const Tasks = () => {
   <List>
     {[
       { key: 'create', label: 'Create Task' },
-      { key: 'all', label: 'All Tasks' },
+      { key: 'delegated', label: 'Delegated Tasks' },
       { key: 'mine', label: 'My Tasks' },
     ].map((item) => (
       <ListItemButton
@@ -93,7 +93,7 @@ const Tasks = () => {
   }}
 >
   {selectedTab === 'create' && <CreateTask />}
-  {selectedTab === 'all' && <AllTasks />}
+  {selectedTab === 'delegated' && <AllTasks />}
   {selectedTab === 'mine' && <MyTasks />}
 </Box>
 

@@ -7,6 +7,9 @@ import GoogleIcon from "../assets/google-original.svg";
 import GitIcon from "../assets/github-original.svg";
 import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
+import  { AxiosError } from "axios";
+import axios from '../api/axios';
+
 
 const LoginSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -17,8 +20,6 @@ const LoginSchema = Yup.object({
 const LoginPage = () => {
   const navigate = useNavigate();
 
-  const staticEmail = "admin@accelyzei.com";
-  const staticPassword = "password123";
   return (
     <Box
       sx={{
@@ -95,16 +96,29 @@ const LoginPage = () => {
           <Formik
             initialValues={{ email: "", password: "" }}
             validationSchema={LoginSchema}
-            onSubmit={(values, { setSubmitting, setErrors }) => {
-              if (
-                values.email === staticEmail &&
-                values.password === staticPassword
-              ) {
+            onSubmit={async (values, { setSubmitting, setErrors }) => {
+              try {
+                const response = await axios.post("/api/auth/login", {
+                  email: values.email,
+                  password: values.password,
+                });
+            
+                const token = response.data.token;
+                localStorage.setItem("token", token);
                 navigate("/dashboard");
-              } else {
-                setErrors({ password: "Invalid credentials" }); 
+            
+              } catch (error) {
+                const err = error as AxiosError;
+            
+                if (err.response && err.response.data) {
+                  const message = (err.response.data as any).message || "Login failed";
+                  setErrors({ password: message });
+                } else {
+                  setErrors({ password: "Something went wrong. Try again." });
+                }
+              } finally {
+                setSubmitting(false);
               }
-              setSubmitting(false);
             }}
           >
             {({ handleChange, handleSubmit, values, errors, touched }) => (

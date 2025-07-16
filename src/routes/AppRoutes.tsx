@@ -3,6 +3,7 @@ import LoginPage from '../pages/LoginPage'
 import Dashboard from '../pages/Dashboard'
 import Teams from '../pages/Teams'
 import Tasks from '../pages/Tasks'
+import Users from '../pages/User'
 import DashboardLayout from '../pages/DashboardLayout'
 
 const AppRoutes = () => {
@@ -13,6 +14,8 @@ const AppRoutes = () => {
     <Route index element={<Dashboard />} />
     <Route path="teams" element={<Teams />} />
     <Route path="tasks" element={<Tasks />} />
+    <Route path="users" element={<Users />} />
+
   </Route>
 
   {/* Login page */}
