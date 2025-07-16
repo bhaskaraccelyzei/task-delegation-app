@@ -7,9 +7,9 @@ import GoogleIcon from "../assets/google-original.svg";
 import GitIcon from "../assets/github-original.svg";
 import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
-import  { AxiosError } from "axios";
-import axios from '../api/axios';
-
+import { AxiosError } from "axios";
+import axios from "../api/axios";
+import { useState } from "react";
 
 const LoginSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -19,6 +19,7 @@ const LoginSchema = Yup.object({
 });
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   return (
     <Box
@@ -97,26 +98,28 @@ const LoginPage = () => {
             initialValues={{ email: "", password: "" }}
             validationSchema={LoginSchema}
             onSubmit={async (values, { setSubmitting, setErrors }) => {
+              setLoading(true);
               try {
                 const response = await axios.post("/api/auth/login", {
                   email: values.email,
                   password: values.password,
                 });
-            
+
                 const token = response.data.token;
                 localStorage.setItem("token", token);
                 navigate("/dashboard");
-            
               } catch (error) {
                 const err = error as AxiosError;
-            
+
                 if (err.response && err.response.data) {
-                  const message = (err.response.data as any).message || "Login failed";
+                  const message =
+                    (err.response.data as any).message || "Login failed";
                   setErrors({ password: message });
                 } else {
                   setErrors({ password: "Something went wrong. Try again." });
                 }
               } finally {
+                setLoading(false);
                 setSubmitting(false);
               }
             }}
@@ -153,6 +156,7 @@ const LoginPage = () => {
                     color="primary"
                     size="large"
                     type="submit"
+                    disabled={loading}
                     sx={{
                       textTransform: "none",
                       fontWeight: "bold",
@@ -160,9 +164,8 @@ const LoginPage = () => {
                       py: 1.5,
                     }}
                   >
-                    Sign In
+                    {loading ? "Signing In..." : "Sign In"}
                   </Button>
-
                   <Box display="flex" justifyContent="center" gap={2}>
                     <Button
                       fullWidth
